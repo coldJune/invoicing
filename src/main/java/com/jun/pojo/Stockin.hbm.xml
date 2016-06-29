@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.jun.pojo.Stockin" table="stockin">
+		<id name="id" type="int">
+			<column name="id"></column>
+			<generator class="identity"></generator>
+		</id>
+		<many-to-one name="employee" class="com.jun.pojo.Employee" fetch="select">
+			<column name="handleoperatorid" not-null="true">
+				<comment>员工编号</comment>
+			</column>
+		</many-to-one>
+		<many-to-one name="merchandise" class="com,jun.pojo.Merchandise" fetch="select">
+			<column name="merchandiseid" not-null="true">
+				<comment>商品编号</comment>
+			</column>	
+		</many-to-one>
+		<many-to-one name="client" cascade="com.jun.pojo.Client" fetch="select">
+			<column name="clientid" not-null="true">
+				<comment>客户编号</comment>
+			</column>
+		</many-to-one>
+		<property name="code" type="string">
+			<column name="code" length="11" not-null="true">
+				<comment>订单编号</comment>
+			</column>
+		</property>
+		<property name="merchandisenumber" type="int">
+			<column name="merchandisenumber" not-null="true">
+				<comment>订货数量</comment>
+			</column>
+		</property>
+		<property name="orderdate" type="string">
+			<column name="orderdate" length="10" not-null="true">
+				<comment>订货日期</comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

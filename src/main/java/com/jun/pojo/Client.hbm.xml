@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.jun.pojo.Client" table="client">
+		<id name="id" type="int">
+			<column name="id">
+			</column>
+			<generator class="identity"></generator>
+		</id>
+		
+		<property name="code" type="string">
+			<column name="code" length="3" not-null="true">
+				<comment>客户编号</comment>
+			</column>
+		</property>
+		<property name="name" type="string">
+			<column name="name" length="50" not-null="true">
+				<comment>客户姓名</comment>
+			</column>
+		</property>
+		<property name="address" type="string">
+			<column name="address" length="50" not-null="true">
+				<comment>地址</comment>
+			</column>
+		</property>
+		<property name="telephone" type="string">
+			<column name="telephone" length="30" not-null="true">
+				<comment>电话</comment>
+			</column>
+		</property>
+		<property name="email" type="string">
+			<column name="email" length="30" not-null="true">
+				<comment>邮箱</comment>
+			</column>
+		</property>
+		<set name="stockins" table="stockin" inverse="true" lazy="true" fetch="select" cascade="all-delete-orphan">
+			<key>
+				<column name="clientid" not-null="true">
+					<comment>进货单</comment>
+				</column>
+			</key>
+			<one-to-many class="com.jun.pojo.Stockin"/>		
+		</set>
+		<set name="stockorders" table="stockorder" inverse="true" lazy="true" fetch="select" cascade="all-delete-orphan">
+			<key>
+				<column name="clientid" not-null="true">
+					<comment>订货单</comment>
+				</column>
+			</key>
+			<one-to-many class="com.jun.pojo.Stockorder"/>
+		</set>
+	</class>
+</hibernate-mapping>
